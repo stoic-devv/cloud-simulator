@@ -1,4 +1,4 @@
-name := "CloudOrgSimulator"
+name := "cloud-simulator"
 
 version := "0.1"
 
