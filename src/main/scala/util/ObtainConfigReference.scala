@@ -1,4 +1,4 @@
-package HelperUtils
+package util
 
 import com.typesafe.config.{Config, ConfigFactory}
 

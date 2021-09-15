@@ -1,6 +1,6 @@
-package Simulations
+package simulations
 
-import Simulations.BasicCloudSimPlusExample.config
+import simulations.BasicCloudSimPlusExample.config
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 

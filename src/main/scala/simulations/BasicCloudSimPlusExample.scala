@@ -1,6 +1,6 @@
-package Simulations
+package simulations
 
-import HelperUtils.{CreateLogger, ObtainConfigReference}
+import util.{CreateLogger, ObtainConfigReference}
 import org.cloudbus.cloudsim.brokers.DatacenterBrokerSimple
 import org.cloudbus.cloudsim.cloudlets.CloudletSimple
 import org.cloudbus.cloudsim.core.CloudSim

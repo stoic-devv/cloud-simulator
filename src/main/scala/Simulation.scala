@@ -1,5 +1,5 @@
-import HelperUtils.{CreateLogger, ObtainConfigReference}
-import Simulations.BasicCloudSimPlusExample
+import util.{CreateLogger, ObtainConfigReference}
+import simulations.BasicCloudSimPlusExample
 import com.typesafe.config.ConfigFactory
 import org.slf4j.LoggerFactory
 
