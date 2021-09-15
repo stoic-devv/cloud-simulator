@@ -1,18 +1,26 @@
 package config
 
+import util.{CreateLogger, ObtainConfigReference}
+
 case class DatacenterConfig(configFile: String, configEntry: String) {
-  
-  // ToDo: implement once beginning to use in policies
-  /*
-  * val configItem: String = "simulation" + simulNum + "." + "dataCenter" + index + "."
-        numberOfHosts = conf.getInt(configItem + "numberOfHosts")
-        numberOfVms = conf.getInt(configItem + "numberOfVms")
-        numberOfCloudlets = conf.getInt(configItem + "numberOfCloudlets")
-        arch = conf.getString(configItem + "arch")
-        os = conf.getString(configItem + "os")
-        vmm = conf.getString(configItem + "vmm")
-        costPerSecond = conf.getDouble(configItem + "costPerSecond")
-        costPerMem = conf.getDouble(configItem + "costPerMem")
-        costPerStorage = conf.getDouble(configItem + "costPerStorage")
-        costPerBw = conf.getDouble(configItem + "costPerStorage")*/
+
+  private val config = ObtainConfigReference(configFile, configEntry) match {
+    case Some(value) => value
+    case None => throw new RuntimeException("Cannot obtain a reference to the config data.")
+  }
+  private val logger = CreateLogger(classOf[DatacenterConfig])
+
+  // ToDo: Make robust with default values and exception handling
+  val hosts = config.getInt("dc.hosts")
+  val vms = config.getLong("dc.vms")
+  val cloudlets = config.getLong("dc.cloudlets")
+  val arch = config.getLong("dc.arch")
+  val os = config.getInt("dc.os")
+  val vmm = config.getInt("dc.vmm")
+  val costPerSecond = config.getInt("dc.costPerSecond")
+  val costPerRam = config.getInt("dc.costPerRam")
+  val costPerStorage = config.getInt("dc.costPerStorage")
+  val costPerBw = config.getInt("dc.costPerBw")
+
+  logger.debug(s"Datacenter configured successfully for $configEntry")
 }
