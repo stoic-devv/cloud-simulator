@@ -1,5 +1,6 @@
 package simulations
 
+import config.{CloudletConfig, VMConfig}
 import util.{CreateLogger, ObtainConfigReference}
 import org.cloudbus.cloudsim.brokers.DatacenterBrokerSimple
 import org.cloudbus.cloudsim.cloudlets.CloudletSimple
@@ -16,39 +17,45 @@ import collection.JavaConverters.*
 class BasicCloudSimPlusExample
 
 object BasicCloudSimPlusExample:
-  val config = ObtainConfigReference("cloudSimulator") match {
+  val config = ObtainConfigReference("basic-simulation", "cloudSimulator") match {
     case Some(value) => value
     case None => throw new RuntimeException("Cannot obtain a reference to the config data.")
   }
+
   val logger = CreateLogger(classOf[BasicCloudSimPlusExample])
+
+  val hostConfig = VMConfig("basic-simulation", "cloudSimulator")
+  val vmConfig = VMConfig("basic-simulation", "cloudSimulator")
+
 
   def Start() =
     val cloudsim = new CloudSim();
     val broker0 = new DatacenterBrokerSimple(cloudsim);
 
-    val hostPes = List(new PeSimple(config.getLong("cloudSimulator.host.mipsCapacity")))
+
+    val hostPes = List(new PeSimple(hostConfig.mips))
     logger.info(s"Created one processing element: $hostPes")
 
-    val hostList = List(new HostSimple(config.getLong("cloudSimulator.host.RAMInMBs"),
-      config.getLong("cloudSimulator.host.StorageInMBs"),
-      config.getLong("cloudSimulator.host.BandwidthInMBps"),
-      hostPes.asJava))
+    val hostList = List(
+      new HostSimple(hostConfig.ram,
+        hostConfig.storage,
+        hostConfig.bw,
+        hostPes.asJava))
 
     logger.info(s"Created one host: $hostList")
 
     val dc0 = new DatacenterSimple(cloudsim, hostList.asJava);
-
     val vmList = List(
-      new VmSimple(config.getLong("cloudSimulator.vm.mipsCapacity"), hostPes.length)
-      .setRam(config.getLong("cloudSimulator.vm.RAMInMBs"))
-      .setBw(config.getLong("cloudSimulator.vm.BandwidthInMBps"))
-      .setSize(config.getLong("cloudSimulator.vm.StorageInMBs"))
-    )
+      new VmSimple(vmConfig.mips, hostPes.length)
+      .setRam(vmConfig.ram)
+      .setBw(vmConfig.bw)
+      .setSize(vmConfig.storage))
     logger.info(s"Created one virtual machine: $vmList")
 
-    val utilizationModel = new UtilizationModelDynamic(config.getDouble("cloudSimulator.utilizationRatio"));
-    val cloudletList = new CloudletSimple(config.getLong("cloudSimulator.cloudlet.size"), config.getInt("cloudSimulator.cloudlet.PEs"), utilizationModel) ::
-      new CloudletSimple(config.getLong("cloudSimulator.cloudlet.size"), config.getInt("cloudSimulator.cloudlet.PEs"), utilizationModel) :: Nil
+    val utilizationModel = new UtilizationModelDynamic(config.getDouble("utilizationRatio"));
+    val cloudletConfig = CloudletConfig("basic-simulation", "cloudSimulator")
+    val cloudletList = new CloudletSimple(cloudletConfig.size, cloudletConfig.numPes, utilizationModel) ::
+      new CloudletSimple(cloudletConfig.size, cloudletConfig.numPes, utilizationModel) :: Nil
 
     logger.info(s"Created a list of cloudlets: $cloudletList")
 
