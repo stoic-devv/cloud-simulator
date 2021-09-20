@@ -2,7 +2,7 @@ package simulations
 
 import config.{CloudletConfig, DatacenterConfig, HostConfig, VmConfig}
 import constants.{BasicSimulationConstants, CloudletConfigConstants}
-import factory.{DatacenterFactory, HostFactory, VmFactory}
+import factory.{CloudletFactory, CloudletUtilizationFactory, DatacenterFactory, HostFactory, VmFactory}
 import util.{CreateLogger, ObtainConfigReference}
 import org.cloudbus.cloudsim.brokers.DatacenterBrokerSimple
 import org.cloudbus.cloudsim.cloudlets.CloudletSimple
@@ -19,7 +19,7 @@ import collection.JavaConverters.*
 class BasicCloudSimPlusExample
 
 object BasicCloudSimPlusExample:
-  
+
   val config = ObtainConfigReference(BasicSimulationConstants.CONFIG_FILE,
     BasicSimulationConstants.CONFIG_ENTRY) match {
     case Some(value) => value
@@ -31,13 +31,13 @@ object BasicCloudSimPlusExample:
   // get config objects for this simulation
   logger.debug("Reading configurations for Basic Simulation")
 
-  val datacenterConfig = DatacenterConfig(BasicSimulationConstants.CONFIG_FILE, 
+  val datacenterConfig = DatacenterConfig(BasicSimulationConstants.CONFIG_FILE,
     BasicSimulationConstants.CONFIG_ENTRY)
-  val hostConfig = HostConfig(BasicSimulationConstants.CONFIG_FILE, 
+  val hostConfig = HostConfig(BasicSimulationConstants.CONFIG_FILE,
     BasicSimulationConstants.CONFIG_ENTRY)
-  val vmConfig = VmConfig(BasicSimulationConstants.CONFIG_FILE, 
+  val vmConfig = VmConfig(BasicSimulationConstants.CONFIG_FILE,
     BasicSimulationConstants.CONFIG_ENTRY)
-  val cloudletConfig = CloudletConfig(BasicSimulationConstants.CONFIG_FILE, 
+  val cloudletConfig = CloudletConfig(BasicSimulationConstants.CONFIG_FILE,
     BasicSimulationConstants.CONFIG_ENTRY)
 
   def Start() =
@@ -55,9 +55,7 @@ object BasicCloudSimPlusExample:
     logger.info(s"Created virtual machines: $vms")
 
     //create cloudlets
-    val utilizationModel = new UtilizationModelDynamic(config.getDouble(CloudletConfigConstants.UTILRATIO))
-    val cloudletList = new CloudletSimple(cloudletConfig.size, cloudletConfig.numPes, utilizationModel) ::
-      new CloudletSimple(cloudletConfig.size, cloudletConfig.numPes, utilizationModel) :: Nil
+    val cloudletList = CloudletFactory.createCloudlets(cloudletConfig, datacenterConfig)
 
     logger.info(s"Created a list of cloudlets: $cloudletList")
 

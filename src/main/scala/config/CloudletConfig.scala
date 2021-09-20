@@ -1,5 +1,6 @@
 package config
 
+import constants.CloudletConfigConstants
 import util.{CreateLogger, ObtainConfigReference}
 
 case class CloudletConfig(configFile: String, configEntry: String) {
@@ -10,8 +11,10 @@ case class CloudletConfig(configFile: String, configEntry: String) {
   private val logger = CreateLogger(classOf[CloudletConfig])
 
   // ToDo: Make robust with default values and exception handling
-  val size = config.getLong("cloudlet.size")
-  val numPes = config.getInt("cloudlet.PEs")
+  val size = config.getLong(CloudletConfigConstants.SIZE)
+  val numPes = config.getInt(CloudletConfigConstants.PES)
+  val utilRatio = config.getDouble(CloudletConfigConstants.UTILRATIO)
+  val utilModel = config.getString(CloudletConfigConstants.UTILMODEL)
 
   logger.debug(s"Cloudlet configured successfully for $configEntry")
 }
