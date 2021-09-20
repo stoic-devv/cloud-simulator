@@ -20,6 +20,7 @@ object HostFactory:
    * @return: list of CPU cores
    **/
   def createPes(hostConfig: HostConfig) : ArrayBuffer[Pe]  = {
+    logger.debug("Creating PEs for host")
     ArrayBuffer.tabulate(hostConfig.numPes)(i => {
       logger.debug("Resource {} added to list", i)
       new PeSimple(hostConfig.mips)
@@ -36,8 +37,7 @@ object HostFactory:
    * */
   def createHost(hostConfig: HostConfig, activateHost: Boolean): Host = {
 
-    logger.debug("Creating PEs for host")
-    // ToDo: check if each host needs its own scheduler.
+    logger.debug("Creating host")
     // Defaults to space shared VM scheduler if scheduler not provided
     return new HostSimple(hostConfig.ram, hostConfig.bw,
       hostConfig.storage, createPes(hostConfig).asJava, activateHost)
