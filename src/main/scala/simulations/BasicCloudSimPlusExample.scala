@@ -1,6 +1,7 @@
 package simulations
 
 import config.{CloudletConfig, DatacenterConfig, HostConfig, VmConfig}
+import constants.{BasicSimulationConstants, CloudletConfigConstants}
 import factory.{DatacenterFactory, HostFactory, VmFactory}
 import util.{CreateLogger, ObtainConfigReference}
 import org.cloudbus.cloudsim.brokers.DatacenterBrokerSimple
@@ -18,7 +19,9 @@ import collection.JavaConverters.*
 class BasicCloudSimPlusExample
 
 object BasicCloudSimPlusExample:
-  val config = ObtainConfigReference("basic-simulation", "cloudSimulator") match {
+  
+  val config = ObtainConfigReference(BasicSimulationConstants.CONFIG_FILE,
+    BasicSimulationConstants.CONFIG_ENTRY) match {
     case Some(value) => value
     case None => throw new RuntimeException("Cannot obtain a reference to the config data.")
   }
@@ -28,23 +31,31 @@ object BasicCloudSimPlusExample:
   // get config objects for this simulation
   logger.debug("Reading configurations for Basic Simulation")
 
-  val datacenterConfig = DatacenterConfig("basic-simulation", "cloudSimulator")
-  val hostConfig = HostConfig("basic-simulation", "cloudSimulator")
-  val vmConfig = VmConfig("basic-simulation", "cloudSimulator")
-  val cloudletConfig = CloudletConfig("basic-simulation", "cloudSimulator")
+  val datacenterConfig = DatacenterConfig(BasicSimulationConstants.CONFIG_FILE, 
+    BasicSimulationConstants.CONFIG_ENTRY)
+  val hostConfig = HostConfig(BasicSimulationConstants.CONFIG_FILE, 
+    BasicSimulationConstants.CONFIG_ENTRY)
+  val vmConfig = VmConfig(BasicSimulationConstants.CONFIG_FILE, 
+    BasicSimulationConstants.CONFIG_ENTRY)
+  val cloudletConfig = CloudletConfig(BasicSimulationConstants.CONFIG_FILE, 
+    BasicSimulationConstants.CONFIG_ENTRY)
 
   def Start() =
     val cloudsim = new CloudSim()
 
+    //create datacenter with host
     val dc0 = DatacenterFactory.createDatacenter(datacenterConfig, hostConfig, cloudsim)
     logger.info(s"Created datacenter: $dc0")
 
+    //create broker
     val broker0 = new DatacenterBrokerSimple(cloudsim)
 
+    //create VMs
     val vms = VmFactory.createVms(vmConfig, hostConfig, datacenterConfig)
     logger.info(s"Created virtual machines: $vms")
 
-    val utilizationModel = new UtilizationModelDynamic(config.getDouble("cloudlet.utilizationRatio"))
+    //create cloudlets
+    val utilizationModel = new UtilizationModelDynamic(config.getDouble(CloudletConfigConstants.UTILRATIO))
     val cloudletList = new CloudletSimple(cloudletConfig.size, cloudletConfig.numPes, utilizationModel) ::
       new CloudletSimple(cloudletConfig.size, cloudletConfig.numPes, utilizationModel) :: Nil
 
