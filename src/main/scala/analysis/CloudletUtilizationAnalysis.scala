@@ -1,7 +1,7 @@
-package simulations.analysis
+package analysis
 
 import constants.BasicSimulationConstants
-import simulations.scheduling.{GenericSimulation, RoundRobinVmScheduler}
+import simulations.GenericSimulation
 import util.CreateLogger
 
 class CloudletUtilizationAnalysis

@@ -1,4 +1,4 @@
-package simulations.scheduling
+package simulations
 
 import config.ConfigData
 import factory.{CloudletFactory, DatacenterFactory, VmFactory}
