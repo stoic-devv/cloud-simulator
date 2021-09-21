@@ -3,7 +3,7 @@ package simulations
 import config.{CloudletConfig, DatacenterConfig, HostConfig, VmConfig}
 import constants.{BasicSimulationConstants, CloudletConfigConstants}
 import factory.{CloudletFactory, CloudletUtilizationFactory, DatacenterFactory, HostFactory, VmFactory}
-import util.{CreateLogger, ObtainConfigReference}
+import util.{CloudletsTableDecorator, CreateLogger, ObtainConfigReference, SimulationUtils}
 import org.cloudbus.cloudsim.brokers.DatacenterBrokerSimple
 import org.cloudbus.cloudsim.cloudlets.CloudletSimple
 import org.cloudbus.cloudsim.core.CloudSim
@@ -65,4 +65,8 @@ object BasicCloudSimPlusExample:
     logger.info("Starting cloud simulation...")
     cloudsim.start();
 
-    new CloudletsTableBuilder(broker0.getCloudletFinishedList()).build();
+    // simulation analysis
+    val ct = new CloudletsTableDecorator(asScala(broker0.getCloudletFinishedList()))
+    ct.addCostColumn()
+    ct.build()
+    println("Total cost for the simulation: " + SimulationUtils.getSimulationCost(asScala(broker0.getCloudletFinishedList())))
