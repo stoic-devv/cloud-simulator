@@ -71,4 +71,4 @@ object HostFactory:
   def createHosts(hostConfig: HostConfig,
                   datacenterConfig: DatacenterConfig): ArrayBuffer[Host] =
     createHosts(hostConfig, datacenterConfig,
-      Some(ArrayBuffer.fill(datacenterConfig.hosts)(true)))
+      Some(ArrayBuffer.fill(datacenterConfig.hosts)(false)))
