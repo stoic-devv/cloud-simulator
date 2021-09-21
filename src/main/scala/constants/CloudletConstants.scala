@@ -13,6 +13,7 @@ object CloudletConfigConstants extends Enumeration {
 object CloudletSchedulerConstants extends Enumeration {
   type String
   val TIMESHARED = "time-shared"
+  val SPACESHARED = "space-shared"
 }
 
 object CloudletUtilizationConstants extends Enumeration {
