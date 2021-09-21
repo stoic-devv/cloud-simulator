@@ -4,6 +4,7 @@ package constants
 object CloudletConfigConstants extends Enumeration {
     type String
     val IDENTIFIER = "cloudlet"
+    val LENGTH = "cloudlet.length"
     val SIZE = "cloudlet.size"
     val PES = "cloudlet.PEs"
     val UTILMODEL = "cloudlet.utilizationModel"

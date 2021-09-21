@@ -11,6 +11,7 @@ case class CloudletConfig(configFile: String, configEntry: String) {
   private val logger = CreateLogger(classOf[CloudletConfig])
 
   // ToDo: Make robust with default values and exception handling
+  val length = config.getLong(CloudletConfigConstants.LENGTH)
   val size = config.getLong(CloudletConfigConstants.SIZE)
   val numPes = config.getInt(CloudletConfigConstants.PES)
   val utilRatio = config.getDouble(CloudletConfigConstants.UTILRATIO)

@@ -17,8 +17,9 @@ object CloudletFactory:
    * @param cloudletConfig Cloudlet configuration object
    **/
   def createCloudlet(cloudletConfig: CloudletConfig): Cloudlet = {
-    return new CloudletSimple(cloudletConfig.size, cloudletConfig.numPes,
+    return new CloudletSimple(cloudletConfig.length, cloudletConfig.numPes,
       CloudletUtilizationFactory.createCloudletUtilModel(cloudletConfig))
+      .setSizes(cloudletConfig.size)
   }
 
   /**
