@@ -1,6 +1,6 @@
 package config
 
-case class ConfigData(configFile: String, configEntry: String) {
+class ConfigData(configFile: String, configEntry: String) {
 
   val datacenterConfig = DatacenterConfig(configFile, configEntry)
   val hostConfig = HostConfig(configFile, configEntry)
