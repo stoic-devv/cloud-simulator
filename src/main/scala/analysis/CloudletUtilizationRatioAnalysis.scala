@@ -4,11 +4,11 @@ import constants.BasicSimulationConstants
 import simulations.GenericSimulation
 import util.CreateLogger
 
-class CloudletUtilizationAnalysis
+class CloudletUtilizationRatioAnalysis
 
-object CloudletUtilizationAnalysis:
+object CloudletUtilizationRatioAnalysis:
 
-  val logger = CreateLogger(classOf[CloudletUtilizationAnalysis])
+  val logger = CreateLogger(classOf[CloudletUtilizationRatioAnalysis])
   
   def Start() = 
 
@@ -53,5 +53,3 @@ object CloudletUtilizationAnalysis:
     logger.info("==== Cloudlet ratio 100% ====")
     gs = new GenericSimulation("cloudlet-util-05-time-space", "cloudlet-util")
     gs.start()
-
-

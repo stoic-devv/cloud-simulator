@@ -21,4 +21,5 @@ object CloudletUtilizationConstants extends Enumeration {
   type String
   val DYNAMIC = "dynamic"
   val FULL = "full"
+  val STOCHASTIC = "stochastic"
 }
