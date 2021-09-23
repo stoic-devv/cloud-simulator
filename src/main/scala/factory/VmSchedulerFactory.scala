@@ -9,10 +9,20 @@ class VmSchedulerFactory
 
 object VmSchedulerFactory:
 
-  def createVmScheduler(hostConfig: HostConfig): VmScheduler = {
-    hostConfig.vmScheduler match {
+  /**
+   * Creates VM scheduler based on constant string.
+   **/
+  def createVmScheduler(schedulingPolicy: String): VmScheduler = {
+    schedulingPolicy match {
       case VmSchedulerConstants.SPACESHARED => new VmSchedulerSpaceShared
       case VmSchedulerConstants.TIMESHARED => new VmSchedulerTimeShared
       case default => new VmSchedulerSpaceShared()
     }
+  }
+
+  /**
+   *Creates VM scheduler based on host config
+   **/
+  def createVmScheduler(hostConfig: HostConfig): VmScheduler = {
+    createVmScheduler(hostConfig.vmScheduler)
   }

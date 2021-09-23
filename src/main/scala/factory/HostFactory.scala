@@ -41,7 +41,7 @@ object HostFactory:
     // Defaults to space shared VM scheduler if scheduler not provided
     return new HostSimple(hostConfig.ram, hostConfig.bw,
       hostConfig.storage, createPes(hostConfig).asJava, activateHost)
-      .setVmScheduler(VmSchedulerFactory.createVmScheduler(hostConfig))
+      .setVmScheduler(VmSchedulerFactory.createVmScheduler(hostConfig.vmScheduler))
   }
 
   /**

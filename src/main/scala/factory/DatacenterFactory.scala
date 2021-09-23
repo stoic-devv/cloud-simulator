@@ -20,7 +20,7 @@ object DatacenterFactory:
   /**
    * Creates a datacenter with given configurations. Attaches hosts to it and
    * adds hosts and vm scheduling and allocation policy.
-   * Defaults to 
+   * Defaults to simple allocation policy and space-shared scheduler.
    **/
   def createDatacenter(datacenterConfig: DatacenterConfig, 
                        hostConfig: HostConfig, cloudSim: CloudSim,
@@ -30,7 +30,7 @@ object DatacenterFactory:
     // and  VmSchedulerSpaceShared policies if not provided
     val dc = new DatacenterSimple(cloudSim,
       HostFactory.createHosts(hostConfig, datacenterConfig, activateHostsOption).asJava,
-      VmAllocationFactory.createVMAllocationPolicy(datacenterConfig))
+      VmAllocationFactory.createVmAllocationPolicy(datacenterConfig))
 
     // set characteristics of the datacenter
     // set characteristics of the datacenter
@@ -48,7 +48,7 @@ object DatacenterFactory:
   /**
    * Creates a datacenter with given configurations. Attaches hosts to it and
    * adds hosts and vm scheduling and allocation policy.
-   * Defaults to 
+   * Defaults to simple allocation policy and space-shared scheduler.
    **/
   def createDatacenter(datacenterConfig: DatacenterConfig,
                        hostConfig: HostConfig, cloudSim: CloudSim): Datacenter = {
