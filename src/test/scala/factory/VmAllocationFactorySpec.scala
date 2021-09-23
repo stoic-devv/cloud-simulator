@@ -10,16 +10,12 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import testconstants.TestConstants
 
-class VmAllocationFactorySpecFactory extends FactoryBaseSpec with BeforeAndAfter {
-
-  // for factory tests theSameInstanceAs
-  // ref1 should be theSameInstanceAs ref2
-  // result1 shouldBe a [Tiger]
-  //result1 should not be an [Orangutan]
+class VmAllocationFactorySpec extends FactoryBaseSpec {
 
   val datacenterConfig = DatacenterConfig(TestConstants.TEST_CONFIG_FILE,
     TestConstants.TEST_CONFIG_ENTRY)
 
+  behavior of "VM Allocation Factory"
   it should "create Vm policy from datacenter configuration" in {
     VmAllocationFactory.createVmAllocationPolicy(datacenterConfig) shouldBe a [VmAllocationPolicyBestFit]
   }
@@ -44,6 +40,10 @@ class VmAllocationFactorySpecFactory extends FactoryBaseSpec with BeforeAndAfter
 
   it should "create Vm round-robin allocation policy" in {
     VmAllocationFactory.createVmAllocationPolicy(VmAllocConstants.ROUNDROBIN) shouldBe a [VmAllocationPolicyRoundRobin]
+  }
+
+  it should "by default create best-fit policy" in {
+    VmAllocationFactory.createVmAllocationPolicy("") shouldBe a [VmAllocationPolicySimple]
   }
 
 
