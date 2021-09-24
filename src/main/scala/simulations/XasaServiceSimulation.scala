@@ -10,6 +10,9 @@ import util.{CloudletsTableDecorator, CreateLogger, ObtainConfigReference, Simul
 import collection.JavaConverters.*
 import scala.collection.mutable.ArrayBuffer
 
+/**
+ * Simulates computing models as saas, paas and iaas
+ **/
 class XasaServiceSimulation(saasConfStruct: ConfigStruct, paasConfStruct: ConfigStruct,
                             iaasConfStruct: ConfigStruct){
 
@@ -40,6 +43,9 @@ class XasaServiceSimulation(saasConfStruct: ConfigStruct, paasConfStruct: Config
   }
 
 
+  /**
+   * Generic simulator for saas, paas and iaas models of cloud computations
+   * */
   def startSimulation(datacenterConfig: DatacenterConfig, hostConfig: HostConfig,
                       vmConfig: VmConfig, cloudletConfig: CloudletConfig): Unit = {
     val cloudsim = new CloudSim()
@@ -75,6 +81,10 @@ class XasaServiceSimulation(saasConfStruct: ConfigStruct, paasConfStruct: Config
     SimulationUtils.logAnalysisForCloudlets(asScala(broker0.getCloudletFinishedList()))
   }
 
+  /**
+  * Returns a configuration for paas setup.
+  * It uses default datacenters, host and vm config while customizing cloudlets and its scheduling policies.
+   **/
   def getPassConfig(saasConfStruct: ConfigStruct, paasConfStruct: ConfigStruct): ConfigDataX = {
     val saasConfig = new ConfigData(saasConfStruct.configFile, saasConfStruct.configEntry)
     // reading vm and cloudlet config from pass.conf file
@@ -84,7 +94,9 @@ class XasaServiceSimulation(saasConfStruct: ConfigStruct, paasConfStruct: Config
     new ConfigDataX(saasConfig.datacenterConfig, saasConfig.hostConfig, vmConfig, cloudletConfig)
   }
 
-  // dummy config data holder
+  /**
+   * Config data holder for cleaner code
+   **/
   case class ConfigDataX(dcConfig: DatacenterConfig, hConfig: HostConfig, vConfig: VmConfig, cConfig: CloudletConfig) {
     val datacenterConfig = dcConfig
     val hostConfig = hConfig

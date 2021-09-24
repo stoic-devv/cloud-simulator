@@ -3,6 +3,9 @@ package config
 import constants.CloudletConfigConstants
 import util.{CreateLogger, ObtainConfigReference}
 
+/**
+ * Parses and holds configuration for the cloudlet configuration
+ **/
 case class CloudletConfig(configFile: String, configEntry: String) {
   private val config = ObtainConfigReference(configFile, configEntry) match {
     case Some(value) => value

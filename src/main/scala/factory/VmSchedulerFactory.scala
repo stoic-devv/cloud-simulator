@@ -5,6 +5,9 @@ import constants.VmSchedulerConstants
 import org.cloudbus.cloudsim.schedulers.cloudlet.CloudletSchedulerTimeShared
 import org.cloudbus.cloudsim.schedulers.vm.{VmScheduler, VmSchedulerSpaceShared, VmSchedulerTimeShared}
 
+/**
+ * Factory class to provide VM schedulers.
+ **/
 class VmSchedulerFactory
 
 object VmSchedulerFactory:

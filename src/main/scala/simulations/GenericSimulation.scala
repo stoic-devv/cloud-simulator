@@ -10,6 +10,9 @@ import collection.JavaConverters.*
 import scala.collection.mutable.ArrayBuffer
 
 
+/**
+ * Generic simulator that runs for our configuration format
+ **/
 class GenericSimulation(configStruct: ConfigStruct) {
 
   val logger = CreateLogger(classOf[GenericSimulation])
@@ -48,14 +51,14 @@ class GenericSimulation(configStruct: ConfigStruct) {
 
     logger.info("Starting cloud simulation...")
     cloudsim.start();
-
+    logger.info("Simulation finished successfully!")
+    
     // simulation analysis
     val ct = new CloudletsTableDecorator(asScala(broker0.getCloudletFinishedList()))
     ct.addCostColumn()
     ct.build()
     // adds average and total costs and performance
     SimulationUtils.logAnalysisForCloudlets(asScala(broker0.getCloudletFinishedList()))
-
   }
 }
 

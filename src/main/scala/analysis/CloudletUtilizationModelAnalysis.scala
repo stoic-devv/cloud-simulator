@@ -12,7 +12,7 @@ object CloudletUtilizationModelAnalysis:
 
   def Start() =
 
-    logger.info("ANALYZE CLOUDLET UTILIZATION MODELS")
+    logger.info("==== ANALYZE CLOUDLET UTILIZATION MODELS ====")
     
     logger.info("==== FULL ====")
     var gs = new GenericSimulation(ConfigStruct("cloudlet-util-full", "cloudlet-util"))

@@ -12,6 +12,10 @@ import util.{CreateLogger}
 import scala.collection.mutable.ArrayBuffer
 import scala.jdk.CollectionConverters.*
 
+/**
+ * Factory class to provide dacenter based on a given configuration.
+ * It also creates and attaches hosts to the datacenter.
+ **/
 class DatacenterFactory
 object DatacenterFactory:
 

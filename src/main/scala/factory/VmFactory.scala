@@ -6,6 +6,9 @@ import util.CreateLogger
 
 import scala.collection.mutable.ArrayBuffer
 
+/**
+ * Factory class to create VMs
+ */
 class VmFactory
 
 object VmFactory:

@@ -11,6 +11,9 @@ import util.{CloudletsTableDecorator, CreateLogger, SimulationUtils}
 import collection.JavaConverters.*
 import scala.collection.mutable.ArrayBuffer
 
+/**
+ * Simulates multiple datacenters connected in a BRITE topology
+ **/
 class NetworkTopologySimulation(configStruct: ConfigStruct, topologyFile: String) {
 
   val logger = CreateLogger(classOf[NetworkTopologySimulation])
@@ -47,7 +50,8 @@ class NetworkTopologySimulation(configStruct: ConfigStruct, topologyFile: String
 
     logger.info("Starting cloud simulation...")
     cloudsim.start();
-
+    logger.info("Simulations finished successfully!")
+    
     // simulation analysis
     val ct = new CloudletsTableDecorator(asScala(broker.getCloudletFinishedList()))
     ct.addCostColumn()

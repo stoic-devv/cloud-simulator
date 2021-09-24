@@ -13,7 +13,7 @@ object CloudletUtilizationRatioAnalysis:
   
   def Start() = 
     
-    logger.info("ANALYZE WITH VARYING CLOUDLET UTILIZATION RATIO, TIME-SHARED VM SCHEDULER AND SPACE-SHARED CLOUDLET SCHEDULER")
+    logger.info("==== ANALYZE WITH VARYING CLOUDLET UTILIZATION RATIO, TIME-SHARED VM SCHEDULER AND SPACE-SHARED CLOUDLET SCHEDULER ====")
     logger.info("==== Cloudlet ratio 20% ====")
     var gs = new GenericSimulation(ConfigStruct("cloudlet-util-01", "cloudlet-util"))
     gs.start()

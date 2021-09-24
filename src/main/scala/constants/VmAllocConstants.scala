@@ -1,5 +1,8 @@
 package constants
 
+/**
+* Enumerations of different VM allocation policies used.
+ **/
 object VmAllocConstants extends Enumeration {
   type String = Value
   val BESTFIT = "best-fit"

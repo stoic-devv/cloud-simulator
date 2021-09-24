@@ -1,5 +1,8 @@
 package config
 
+/**
+ * data structure to hold config data for datacenter, hosts, vms and cloudlets.
+ **/
 class ConfigData(configFile: String, configEntry: String) {
 
   val datacenterConfig = DatacenterConfig(configFile, configEntry)

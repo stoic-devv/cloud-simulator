@@ -2,6 +2,9 @@ package config
 
 import util.{CreateLogger, ObtainConfigReference}
 
+/**
+ * Data structure to parse and hold host configuration.
+ **/
 case class HostConfig(configFile: String, configEntry: String) {
 
   private val config = ObtainConfigReference(configFile, configEntry) match {

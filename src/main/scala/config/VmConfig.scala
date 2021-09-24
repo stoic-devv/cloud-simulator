@@ -3,6 +3,9 @@ package config
 import org.cloudbus.cloudsim.vms.VmSimple
 import util.{CreateLogger, ObtainConfigReference}
 
+/**
+ * Data structure to parse and hold VM configuration.
+ **/
 case class VmConfig(configFile: String, configEntry: String) {
 
   private val config = ObtainConfigReference(configFile, configEntry) match {

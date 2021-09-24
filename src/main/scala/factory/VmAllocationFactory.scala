@@ -7,6 +7,9 @@ import org.cloudbus.cloudsim.distributions.{NormalDistr, UniformDistr}
 
 import scala.util.Random
 
+/**
+ * Factory class to provide VM allocation policy based on a given configuration.
+ **/
 class VmAllocationFactory
 
 object VmAllocationFactory:

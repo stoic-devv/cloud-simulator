@@ -11,6 +11,9 @@ import scala.jdk.CollectionConverters.*
 
 class HostFactory
 
+/**
+ * Creates hosts and host list based on configuration with PEs.
+ **/
 object HostFactory:
 
   val logger = CreateLogger(classOf[HostFactory])

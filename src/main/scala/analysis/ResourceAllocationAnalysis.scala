@@ -13,7 +13,7 @@ object ResourceAllocationAnalysis:
 
   def Start() =
 
-    logger.info("ANALYZING VM SCHEDULING POLICIES")
+    logger.info("==== ANALYZING VM SCHEDULING POLICIES ====")
 
     /*logger.info("==== Worst-Fit Policy ====")
     var gs = new GenericSimulation(ConfigStruct("vm-allocation-worst-fit", "vm-allocation"))

@@ -1,6 +1,8 @@
 package constants
 
-
+/**
+ * Enumeration of configuration file params
+ **/
 object CloudletConfigConstants extends Enumeration {
     type String
     val IDENTIFIER = "cloudlet"
@@ -11,12 +13,18 @@ object CloudletConfigConstants extends Enumeration {
     val UTILRATIO = "cloudlet.utilizationRatio"
 }
 
+/**
+ * Enumeration of Cloudlet schedulers
+ **/
 object CloudletSchedulerConstants extends Enumeration {
   type String
   val TIMESHARED = "time-shared"
   val SPACESHARED = "space-shared"
 }
 
+/**
+ * Enumeration of Cloudlet utilization models
+ **/
 object CloudletUtilizationConstants extends Enumeration {
   type String
   val DYNAMIC = "dynamic"

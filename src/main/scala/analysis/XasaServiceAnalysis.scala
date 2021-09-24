@@ -12,6 +12,7 @@ object XasaServiceAnalysis:
 
   def Start() = {
 
+    logger.info("==== ANALYZING SAAS, PAAS, IAAS MODELS OF CLOUD COMPUTATION ====")
     // create config structs
     val saasConfStruct = new ConfigStruct("saas", "saas-default")
     val paasConfStruct = new ConfigStruct("paas", "paas-default")

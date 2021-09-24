@@ -12,6 +12,7 @@ object NetworkTopologyAnalysis:
 
   def Start() =
 
+    logger.info("==== ANALYZE MULTIPLE DATACENTERS IN A NETWORK TOPOLOGY ====")
     logger.info("==== Starting simulation with multiple datacenters in a network topology ===")
     var nts = new NetworkTopologySimulation(ConfigStruct("network-topology", "network-topology"), "topology.brite")
     nts.start()

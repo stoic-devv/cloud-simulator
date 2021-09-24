@@ -6,6 +6,9 @@ import util.CreateLogger
 
 import scala.collection.mutable.ArrayBuffer
 
+/**
+ * Factory class to create cloudlet and cloudlet list
+ **/
 class CloudletFactory
 
 object CloudletFactory:

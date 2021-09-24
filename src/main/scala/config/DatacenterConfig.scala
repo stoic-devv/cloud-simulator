@@ -2,6 +2,9 @@ package config
 
 import util.{CreateLogger, ObtainConfigReference}
 
+/**
+ * data structure to parse and hold datacenter configuration
+ **/
 case class DatacenterConfig(configFile: String, configEntry: String) {
 
   private val config = ObtainConfigReference(configFile, configEntry) match {

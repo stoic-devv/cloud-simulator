@@ -4,6 +4,9 @@ import config.VmConfig
 import constants.CloudletSchedulerConstants
 import org.cloudbus.cloudsim.schedulers.cloudlet.{CloudletSchedulerAbstract, CloudletSchedulerSpaceShared, CloudletSchedulerTimeShared}
 
+/**
+ * Factory class to provide Cloudlet scheduling polcy based on configuration
+ **/
 class CloudletSchedulerFactory
 
 object CloudletSchedulerFactory:
