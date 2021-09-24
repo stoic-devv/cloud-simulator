@@ -50,6 +50,7 @@ class GenericSimulation(configStruct: ConfigStruct) {
     val ct = new CloudletsTableDecorator(asScala(broker0.getCloudletFinishedList()))
     ct.addCostColumn()
     ct.build()
+    // adds average and total costs and performance
     SimulationUtils.logAnalysisForCloudlets(asScala(broker0.getCloudletFinishedList()))
 
   }
