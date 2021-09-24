@@ -49,7 +49,7 @@ For `time-shared` cloudlet scheduler, `space-shared` VM scheduler and `round-rob
    17:17:32.548 [main] WARN  CloudletScheduler - 1.10: CloudletSchedulerTimeShared: Cloudlet 8 requested 1000 Mbps of Bandwidth but no amount is available., which delays Cloudlet processing.
    ```
 3. Cloudlets with less utilization ratio are underusing the platform resources. This too leads to higher cost and resources because of frequent context switching.
-4. Since the `time-shared` cloudlet scheduler is not pre-emptive (does not make room for the cloudlets already in the waiting list), there is a time lag between consecutive cloudlet execution. This time lag increases with higher utilization of the cloudlets. From logs: <br />
+4. Since the `time-shared` cloudlet scheduler is not pre-emptive (does not make room for the cloudlets already in the waiting list), there is a time lag between consecutive cloudlet execution. This time lag increases with higher utilization of the cloudlets. See [[1]](#cite-1) and [[2]](#cite-2). From logs: <br />
    For 20%
    ```
    17:17:32.144 [main] INFO  DatacenterBroker - 5.11: DatacenterBrokerSimple2: Cloudlet 7 finished in Vm 7 and returned to broker.
@@ -81,9 +81,8 @@ are not included it in the observations and configuration, and also don't provid
 
 #### Inference: Part II
 1. Since the cloudlets run asynchronously and have same configuration, all of them have similar time to completion
-2. There has been a significant improvement in the cost and performance with having `space-shared` cloudlet scheduler. This is because
-3. Unlike in  [Part I](#observations-part-i) of the experiment, the resources are distributed equitably and the cloudlets don't wait in the execution queue for long.
-4. The wait-time is because `space-shared` scheduler allows only one cloudlet per VM
+2. There has been a significant improvement in the cost and performance with having `space-shared` cloudlet scheduler. This is because unlike in  [Part I](#observations-part-i) of the experiment, the resources are distributed equitably and the cloudlets don't wait in the execution queue for long.
+3. The wait-time is because `space-shared` scheduler allows only one cloudlet per VM
 
 #### Observations: Part III
 
@@ -99,7 +98,9 @@ are not included it in the observations and configuration, and also don't provid
 1. No heuristic or random performs the worst
 
 ### SaaS, PaaS and IaaS Analysis
-
+![image](/doc/img/saas.png)
+![image](/doc/img/paas.png)
+![image](/doc/img/iaas.png)
 
 
 [comment]: <> (Attach screenshots of the performance; so keep the numbers low)
@@ -128,3 +129,10 @@ Talk about this is a simulation and not to
 
 3. `round-robin` allocation policy
    Allocates VM in a circular way. It's time efficient `O(1)` but increases the number of active hosts and hence power consumption
+
+### References
+<a id="cite-1">[1]</a>
+https://www.javadoc.io/doc/org.cloudsimplus/cloudsim-plus/1.2.4/org/cloudbus/cloudsim/schedulers/cloudlet/CloudletSchedulerTimeShared.html
+
+<a id="cite-2">[2]</a>
+https://github.com/manoelcampos/cloudsimplus/issues/170
