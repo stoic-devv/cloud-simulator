@@ -113,7 +113,14 @@ Talk about this is a simulation and not to
 
 ### Multiple datacenters in a network
 #### Observations
+
+[comment]: <> (add performance and cost screenshot)
 #### Inference
+```
+01:37:10.634 [main] WARN  VmAllocationPolicy - 3.00: VmAllocationPolicySimple: No suitable host found for Vm 1 in Datacenter 2
+01:37:10.637 [main] INFO  DatacenterBroker - 6.10: DatacenterBrokerSimple1: Trying to create Vm 1 in DatacenterSimple3
+01:37:10.638 [main] INFO  VmAllocationPolicy - 10.20: VmAllocationPolicySimple: Vm 1 has been allocated to Host 0/DC 3
+```
 
 ### Resource Allocation
 1. `best-fit` VM allocation policy
