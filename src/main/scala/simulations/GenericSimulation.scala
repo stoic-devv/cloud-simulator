@@ -1,6 +1,6 @@
 package simulations
 
-import config.ConfigData
+import config.{ConfigData, ConfigStruct}
 import factory.{CloudletFactory, DatacenterFactory, VmFactory}
 import org.cloudbus.cloudsim.brokers.DatacenterBrokerSimple
 import org.cloudbus.cloudsim.core.CloudSim
@@ -10,20 +10,16 @@ import collection.JavaConverters.*
 import scala.collection.mutable.ArrayBuffer
 
 
-class GenericSimulation(var configFile: String,
-  var configEntry: String) {
+class GenericSimulation(configStruct: ConfigStruct) {
 
   def start(): Unit = {
 
     val logger = CreateLogger(classOf[GenericSimulation])
 
-    ObtainConfigReference(configFile, configEntry) match {
-      case Some(value) => value
-      case None => throw new RuntimeException("Cannot obtain a reference to the config data.")
-    }
-    logger.info("Running configuration - " + configFile)
+    SimulationUtils.checkConfig(configStruct.configFile, configStruct.configEntry)
+    logger.info("Running configuration - " + configStruct.configFile)
 
-    val config = new ConfigData(configFile, configEntry)
+    val config = new ConfigData(configStruct.configFile, configStruct.configEntry)
 
     val cloudsim = new CloudSim()
 

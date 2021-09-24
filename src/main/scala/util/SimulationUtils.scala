@@ -8,6 +8,13 @@ class SimulationUtils
 object SimulationUtils:
   
   val logger = CreateLogger(classOf[SimulationUtils])
+
+  def checkConfig(configFile: String, configEntry: String) = {
+    ObtainConfigReference(configFile, configEntry) match {
+      case Some(value) => value
+      case None => throw new RuntimeException("Cannot obtain a reference to the config data.")
+    }
+  }
   
   def getSimulationCost(finishedCloudlets: Buffer[Cloudlet]): Double = {
     var simCost = 0.0

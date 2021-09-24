@@ -1,7 +1,7 @@
 import util.{CreateLogger, ObtainConfigReference}
 import com.typesafe.config.ConfigFactory
 import org.slf4j.LoggerFactory
-import analysis.{CloudletUtilizationRatioAnalysis, CloudletUtilizationModelAnalysis}
+import analysis.{CloudletUtilizationModelAnalysis, CloudletUtilizationRatioAnalysis, ResourceAllocationAnalysis}
 
 object RunSimulations:
   val logger = CreateLogger(classOf[RunSimulations])
@@ -10,5 +10,6 @@ object RunSimulations:
 
     CloudletUtilizationRatioAnalysis.Start()
     CloudletUtilizationModelAnalysis.Start()
+    ResourceAllocationAnalysis.Start()
 
 class RunSimulations
