@@ -13,6 +13,7 @@ val typesafeConfigVersion = "1.4.1"
 val apacheCommonIOVersion = "2.11.0"
 val scalacticVersion = "3.2.9"
 val scalaticPlusVersion = "3.2.9.0"
+val scalaMockVersion = "5.1.0"
 val mockitoVersion = "3.12.4"
 val cloudSimPlusVersion = "6.4.3"
 
@@ -28,6 +29,7 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % scalacticVersion % Test,
   "org.scalatest" %% "scalatest-featurespec" % scalacticVersion % Test,
   "org.scalatestplus" %% "mockito-3-4" % scalaticPlusVersion % Test,
+  "org.scalamock" % "scalamock_2.11" % scalaMockVersion,
   "org.mockito" % "mockito-core" % mockitoVersion,
   "com.typesafe" % "config" % typesafeConfigVersion,
   "org.cloudsimplus" % "cloudsim-plus" % cloudSimPlusVersion
