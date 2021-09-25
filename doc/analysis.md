@@ -1,7 +1,4 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
+## Index
 - [Experiments and Observations](#experiments-and-observations)
   - [Analyzing cloudlet scheduling vs CPU usage](#analyzing-cloudlet-scheduling-vs-cpu-usage)
     - [Observations: Part I](#observations-part-i)
@@ -19,8 +16,6 @@
     - [Inference](#inference-2)
   - [~~Resource Allocation~~ In progress](#resource-allocation-in-progress)
   - [References](#references)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
 ## Experiments and Observations

@@ -1,6 +1,5 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+## Index
 - [About](#about)
 - [Build and Run configurations](#build-and-run-configurations)
 - [Topics](#topics)
@@ -8,7 +7,6 @@
     - [Functional improvements](#functional-improvements)
     - [Technical debts](#technical-debts)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## About
 We use [cloudsimplus](https://github.com/manoelcampos/cloudsimplus) framework to simulate various resource allocation and provisioning scenarios. We also simulate the SaaS, PaaS and IaaS models of cloud computing.
