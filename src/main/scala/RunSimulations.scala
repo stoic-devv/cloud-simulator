@@ -9,7 +9,7 @@ object RunSimulations:
   /**
    * Runs simulations. Entry point of this project.
    **/
-  @main def runSimulation =
+  @main def analyzeSimulations =
 
     logger.info("==== STARTING ANALYSIS FOR CLOUD COMPUTATION SIMULATIONS ====")
     CloudletUtilizationRatioAnalysis.Start()
@@ -18,6 +18,6 @@ object RunSimulations:
     XasaServiceAnalysis.Start()
     NetworkTopologyAnalysis.Start()
     logger.info("==== ANALYSIS COMPLETED SUCCESSFULLY ====")
-    
+
 
 class RunSimulations
