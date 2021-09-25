@@ -2,7 +2,7 @@
 ## Index
 - [About](#about)
 - [Build and Run configurations](#build-and-run-configurations)
-- [Topics](#topics)
+- [Project Wiki](#project-wiki)
   - [Improvements](#improvements)
     - [Functional improvements](#functional-improvements)
     - [Technical debts](#technical-debts)
@@ -14,9 +14,9 @@ Lastly, we explore how multiple datacenters in a network topology communicate an
 
 ## Build and Run configurations
 
-1. This project was developed using `IntelliJ` and is written in `Scala`. We use sbt build tool for compiling, testing and managing dependencies.
-2. [RunSimulations.scala](/src/main/scala/RunSimulations.scala) is the starting point of this project where our main class is defined
-3. You can build this project using sbt [plugin](https://plugins.jetbrains.com/plugin/5007-sbt) for IntelliJ or clone and import this repository as an sbt project. Alternatively, you can download and [install](https://www.scala-sbt.org/download.html) the sbt build tool, and run from your terminal.
+1. This project was developed using `IntelliJ` and is written in `Scala`. We use `sbt` build tool for compiling, testing, and managing dependencies.
+2. [RunSimulations.scala](/src/main/scala/RunSimulations.scala) is the starting point of this project where our main class is defined.
+3. You can build this project using [sbt plugin](https://plugins.jetbrains.com/plugin/5007-sbt) for IntelliJ or clone and import this repository as an sbt project. Alternatively, you can download and [install](https://www.scala-sbt.org/download.html) the sbt build tool, and run from your terminal.
 4. Sbt commands for this project:
 
 `> compile` and `> test` should run successfully with following results:
@@ -27,10 +27,9 @@ Lastly, we explore how multiple datacenters in a network topology communicate an
 [info] Tests: succeeded 30, failed 0, canceled 0, ignored 0, pending 0
 ```
 
-## Topics
-1. [Experiments and analysis](/doc/analysis.md)
-2. [Project structure and design](/doc/design.md)
-3. [Configuration Grammar](/doc/configuration-grammar.md)
+## Project Wiki
+1. [Experiments and Analysis](/doc/analysis.md)
+2. [Project Structure and Design](/doc/design.md)
 
 ### Improvements
 
