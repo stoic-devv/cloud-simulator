@@ -3,9 +3,9 @@
 - [About](#about)
 - [Build and Run configurations](#build-and-run-configurations)
 - [Project Wiki](#project-wiki)
-  - [Improvements](#improvements)
-    - [Functional improvements](#functional-improvements)
-    - [Technical debts](#technical-debts)
+- [Improvements](#improvements)
+  - [Functional improvements](#functional-improvements)
+  - [Technical debts](#technical-debts)
 
 
 ## About
@@ -31,7 +31,7 @@ Lastly, we explore how multiple datacenters in a network topology communicate an
 1. [Experiments and Analysis](/doc/analysis.md)
 2. [Project Structure and Design](/doc/design.md)
 
-### Improvements
+## Improvements
 
 #### Functional improvements
 1. Explore network topology for VMs and hosts too.
