@@ -1,7 +1,6 @@
 package analysis
 
 import config.ConfigStruct
-import constants.BasicSimulationConstants
 import simulations.GenericSimulation
 import util.CreateLogger
 
