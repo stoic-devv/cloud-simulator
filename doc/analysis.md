@@ -3,20 +3,22 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Experiments and Observations](#experiments-and-observations)
-  - [Scheduling with Cloudlet Utlization model](#scheduling-with-cloudlet-utlization-model)
+  - [Analyzing cloudlet scheduling vs CPU usage](#analyzing-cloudlet-scheduling-vs-cpu-usage)
     - [Observations: Part I](#observations-part-i)
     - [Inference: Part I](#inference-part-i)
     - [Observations: Part II](#observations-part-ii)
     - [Inference: Part II](#inference-part-ii)
-    - [Observations: Part III](#observations-part-iii)
-    - [Inference: Part III](#inference-part-iii)
-  - [SaaS, PaaS and IaaS Analysis](#saas-paas-and-iaas-analysis)
+  - [Analyzing cloudlet utilization models](#analyzing-cloudlet-utilization-models)
+    - [Observations](#observations)
     - [Inference](#inference)
+  - [SaaS, PaaS and IaaS Analysis](#saas-paas-and-iaas-analysis)
+    - [Inference](#inference-1)
     - [Supplementary inference](#supplementary-inference)
   - [Multiple datacenters in a network](#multiple-datacenters-in-a-network)
-    - [Observations](#observations)
-    - [Inference](#inference-1)
-  - [Resource Allocation](#resource-allocation)
+    - [Observations](#observations-1)
+    - [Inference](#inference-2)
+  - [~~Resource Allocation~~ In progress](#resource-allocation-in-progress)
+  - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -24,12 +26,12 @@
 ## Experiments and Observations
 
 We try out different scenarios to understand how the cost and performance varies by using different
-scheduling (cloudlets and VM) and VM allocation models.
+scheduling (cloudlets and VM) and VM allocation models. We also explore SaaS, PaaS and IaaS model of cloud computing and how datacenters perform and communicate in a network topology.
 
-### Scheduling with Cloudlet Utlization model
+### Analyzing cloudlet scheduling vs CPU usage
 
 We have taken the base simulation of a single Datacenter, 4 Hosts, 8 VMs and 15 cloudlets. We analyze
-the performance and costs of the simulation with varying utilization powers of the cloudlets.
+the performance and costs of the simulation with varying utilization powers of the cloudlets. For brevity, we capture the results in a tabular form.
 
 #### Observations: Part I
 
@@ -84,46 +86,84 @@ are not included it in the observations and configuration, and also don't provid
 2. There has been a significant improvement in the cost and performance with having `space-shared` cloudlet scheduler. This is because unlike in  [Part I](#observations-part-i) of the experiment, the resources are distributed equitably and the cloudlets don't wait in the execution queue for long.
 3. The wait-time is because `space-shared` scheduler allows only one cloudlet per VM
 
-#### Observations: Part III
+### Analyzing cloudlet utilization models
+We have taken the base simulation of a single Datacenter, 200 Hosts, 400 VMs and 1500 cloudlets. We analyze
+the performance and costs of the simulation with varying utilization models: dynamic, full and stochastic (uniformly random). Here too we tabulate our observations.
+
+#### Observations
 
 | Metric vs Utilization Model | Dynamic | Full   | Stochastic |
 |-----------------------------|---------|--------|------------|
 | Total time                  | 10.77   | 4.65   | 11         |
-| Avg time per cloudlet       | 2.56    | 1.03   | 2.1        |
-| Avg wait time per cloudlet  | 3.73    | 1.6    | 3.1        |
-| Total cost                  | 6684.6  | 3237.6 | 5640.16    |
-| Avg cost per cloudlet       | 4.45    | 2.16   | 3.76       |
+| Avg time per cloudlet       | 1.75    | 1.03   | 2.1        |
+| Avg wait time per cloudlet  | 2.57    | 1.6    | 3.1        |
+| Total cost                  | 4859.0  | 3237.6 | 5640.16    |
+| Avg cost per cloudlet       | 3.24    | 2.16   | 3.76       |
 
-#### Inference: Part III
-1. No heuristic or random performs the worst
+#### Inference
+1. We see the performance Full > Dynamic > Stochastic cloudlet utilization model.
+2. Since this is a simulation where cloudlets consume resources in a _uniform_ way, there isn't sufficient evidence to conclude that Full is the best utilication model and Stochastic the worst.
+3. In real world, applications don't consume resources uniformly hence with Full utilization model we may be over-provisioning our cloudlet. Cloudlet utilization models
+are designed in retrospect with the data of previous runtimes (usually stochastic). [[3]](#cite-3)
 
 ### SaaS, PaaS and IaaS Analysis
+Following are the details of the experiment:
+1. We analyze 3 models of cloud computing: `saas`, `paas`, `iaas`
+   1. `SaaS model`: We do not have control over the resources, its allocation and provision. We deploy our cloudlets with the cloud provider as a black box.
+   2. `PaaS model`: In addition to the `SaaS` model's access, we have some control over the cloudlets that we host. We can configure their scheduling and the number of instances. We still don't have access to the underlying hardware/infrastructure, resources and bandwidth.
+   3. `IaaS model`: We have complete control: hardwares (their specifications and numbers), resource allocation and provision, network and bandwidth.
+2. We analyze these simulations with same cloudlet configuration and customize various resource allocation and provision techniques based upon the access to them in the computation model
+3. We observe cost and performances, and evaluate when to use which model.
+4. For our experiment, we simulate runtimes of `15` cloudlets each having `file size = 512MB`, `instructions = 10000 mips`, `dynamic` utilization model using `2 PEs`.
+5. We observe:
+
+SaaS results
 ![image](/doc/img/saas.png)
+
+PaaS results
 ![image](/doc/img/paas.png)
+
+IaaS results
 ![image](/doc/img/iaas.png)
 
-
-[comment]: <> (Attach screenshots of the performance; so keep the numbers low)
 #### Inference
-1. SaaS has more cost and time utilization
-2. PaaS : talk about experiment 1 results
-3. IaaS: change number of vms host and cloudlets
+1. We see that with increasing level of access over the resources and its allocation:
+   1. cost decreases
+   2. time to completion and wait time decreases
+2. In SaaS, we work with default schedulers maintained by the cloud provider: `time-shared` cloudlet scheduler and `time-shared` VM scheduler. With Paas, we can customize our cloudlet scheduler; we use `space-shared` cloudlet scheduler based upon our [inference](#inference: part ii) of experiment 1.1. There are significant performance and cost gains with this customization.
+3. In IaaS, since we have complete control of resource provisioning and allocations, we increase the number of VMs. From the images in the observations above, we now have each VM running a single cloudlet, unlike SaaS and PaaS, where each VM runs atmost 2 cloudlets.
 
 #### Supplementary inference
-Talk about this is a simulation and not to
+1. Increasing VMs in IaaS may not be cost-effective since in IaaS we are responsible for paying and maintaining the hardware
+2. The improvement from PaaS to IaaS may look insignificant at a cursory glance. But improvement of 0.08 cost per cloudlet and 0.05 time completion scales if we have millions of cloudlets running. This simulation is there in our [future scope](/doc/README.md#improvements)
+3. While deciding which model to use, we need to keep in mind:
+   1. if we are a business having just a few _types_ of cloudlets (applications) SaaS would allow us to focus more on our business use case while improving our time and cost to delivery.
+   2. if we have complex workflows involving cloudlets which rely heavily on each other, we may consider a PaaS computing model. However, most cloud providers have a lot of customizations available and are still generic enough; using these may reduce our time and cost significantly.
 
 ### Multiple datacenters in a network
+Here we explore multiple datacenters (4) in a BRITE network topology. We compare its performance with a single datacenter having resources total of all the resources of the datacenters connected in a network.
+In the network, each datacenter has 1 host with a single PE and 2 VMs. We run 2 cloudlets in both the scenarios
 #### Observations
+Datacenters in a network:
+![image](/doc/img/datacenter-network.png)
 
-[comment]: <> (add performance and cost screenshot)
-#### Inference
 ```
 01:37:10.634 [main] WARN  VmAllocationPolicy - 3.00: VmAllocationPolicySimple: No suitable host found for Vm 1 in Datacenter 2
 01:37:10.637 [main] INFO  DatacenterBroker - 6.10: DatacenterBrokerSimple1: Trying to create Vm 1 in DatacenterSimple3
 01:37:10.638 [main] INFO  VmAllocationPolicy - 10.20: VmAllocationPolicySimple: Vm 1 has been allocated to Host 0/DC 3
 ```
 
-### Resource Allocation
+Solo datacenter:</br>
+![image](/doc/img/solo-datacenter.png)</br>
+_Note_: The total resources allocated to this datacenter are twice the resources of a single datacenter in the previous scenario. This is because only two datacenters were utilized while performing the network topology experiment.
+#### Inference
+1. From the logs of network simulation we see that since host has a single PE, the next VM of the datacenter has no PE available and hence has to connected to the host of other datacenter.
+2. The cloudlets have `40000 mips` and are expected to complete, when served by a VM of `250 mips`, in `40000/250 = 160 sec`. In network simulation the cloudlets run to completion with a higher time (`177/178 sec`). This is because of the network latency of hosting the VM of `Datacenter 2` on the host of `Datacenter 3`.
+3. Despite the higher time to completion (due to latency) in network simulation, we have a same cost in both the cases. This is because we are still using same computation power to serve the cloudlets (above mips calculations). This reassures the pay per use quality of cloud computing.
+4. From point 2 above, we also reaffirm the dynamic allocation of resources in cloud computing.
+
+### ~~Resource Allocation~~ In progress
+
 1. `best-fit` VM allocation policy
    Allocates VM to a host based on the number of PEs in the host. This policy is computationally inefficient as the next VM is allocated in `O(n)` time. The simulation wasn't able
 
@@ -136,3 +176,6 @@ https://www.javadoc.io/doc/org.cloudsimplus/cloudsim-plus/1.2.4/org/cloudbus/clo
 
 <a id="cite-2">[2]</a>
 https://github.com/manoelcampos/cloudsimplus/issues/170
+
+<a id="cite-3">[3]</a>
+CS 441 UIC MS Teams
