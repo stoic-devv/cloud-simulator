@@ -1,0 +1,10 @@
+Student: Aditya Kanthale
+Grader: Vineet Patel
+
+Homework 1
+
+There were multiple commits past the deadline.
+
+Deadline was Friday, September 24, 2021 at 10PM CST. There were 2 commits on Saturday.
+
+Total grade: 0%
